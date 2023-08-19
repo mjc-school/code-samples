@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id 'info.solidsoft.pitest' version '1.9.0'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+    testImplementation 'org.mockito:mockito-core:5.4.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.4.0'
+}
+
+pitest {
+    junit5PluginVersion = '1.0.0'
+    targetClasses = ['school.mjc.blog.*']
+    threads = 4
+    withHistory = true
+    outputFormats = ['XML', 'HTML']
+    timestampedReports = false
+    mutators = ["ALL"]
+}
+
+test {
+    useJUnitPlatform()
+}
